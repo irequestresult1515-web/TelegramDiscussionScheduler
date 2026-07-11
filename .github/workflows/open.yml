@@ -1,0 +1,40 @@
+name: "Open Discussion"
+
+on:
+  schedule:
+    # Runs at 08:00 UTC every Saturday
+    # For Asia/Damascus (UTC+3): 08:00 UTC = 11:00 Damascus time
+    - cron: "25 8 * * *"
+
+  workflow_dispatch:
+
+concurrency:
+  group: open-discussion
+  cancel-in-progress: false
+
+jobs:
+  open-discussion:
+    name: "Open Discussion"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+
+      - name: Restore dependencies
+        run: dotnet restore TelegramDiscussionScheduler/TelegramDiscussionScheduler.csproj
+
+      - name: Run Open Discussion
+        env:
+          Telegram__BotToken: ${{ secrets.BOT_TOKEN }}
+        run: dotnet run --project TelegramDiscussionScheduler/TelegramDiscussionScheduler.csproj -- open
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### Open Discussion workflow completed" >> $GITHUB_STEP_SUMMARY

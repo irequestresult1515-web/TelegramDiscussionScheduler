@@ -1,0 +1,17 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+
+# IDE
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Secrets
+appsettings.*.local.json
+appsettings.Development.json

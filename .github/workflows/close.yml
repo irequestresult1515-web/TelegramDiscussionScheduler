@@ -1,0 +1,40 @@
+name: "Close Discussion"
+
+on:
+  schedule:
+    # Runs at 20:00 UTC every Saturday
+    # For Asia/Damascus (UTC+3): 20:00 UTC = 23:00 Damascus time
+   - cron: "26 8 * * *"
+
+  workflow_dispatch:
+
+concurrency:
+  group: close-discussion
+  cancel-in-progress: false
+
+jobs:
+  close-discussion:
+    name: "Close Discussion"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+
+      - name: Restore dependencies
+        run: dotnet restore TelegramDiscussionScheduler/TelegramDiscussionScheduler.csproj
+
+      - name: Run Close Discussion
+        env:
+          Telegram__BotToken: ${{ secrets.BOT_TOKEN }}
+        run: dotnet run --project TelegramDiscussionScheduler/TelegramDiscussionScheduler.csproj -- close
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### Close Discussion workflow completed" >> $GITHUB_STEP_SUMMARY
