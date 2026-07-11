@@ -7,7 +7,7 @@ using TelegramDiscussionScheduler.Services;
 
 var tt = CreateHostBuilder(args).Build();
 var configuration = tt.Services.GetRequiredService<IConfiguration>();
-
+Console.WriteLine(configuration["Telegram:TimeZone"]);
 Console.WriteLine("===== CONFIGURATION =====");
 Console.WriteLine($"BotToken = {configuration["Telegram:BotToken"]}");
 Console.WriteLine($"GroupName = {configuration["Telegram:Groups:0:GroupName"]}");
