@@ -4,7 +4,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using TelegramDiscussionScheduler.Options;
 using TelegramDiscussionScheduler.Services;
-var host = CreateHostBuilder(args).Build();
 var configuration = host.Services.GetRequiredService<IConfiguration>();
 
 Console.WriteLine("===== CONFIGURATION =====");
