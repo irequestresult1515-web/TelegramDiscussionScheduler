@@ -4,7 +4,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using TelegramDiscussionScheduler.Options;
 using TelegramDiscussionScheduler.Services;
-var configuration = host.Services.GetRequiredService<IConfiguration>();
+
+var tt = CreateHostBuilder(args).Build();
+var configuration = tt.Services.GetRequiredService<IConfiguration>();
 
 Console.WriteLine("===== CONFIGURATION =====");
 Console.WriteLine($"BotToken = {configuration["Telegram:BotToken"]}");
