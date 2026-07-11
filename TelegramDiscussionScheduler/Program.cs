@@ -4,7 +4,14 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using TelegramDiscussionScheduler.Options;
 using TelegramDiscussionScheduler.Services;
+var host = CreateHostBuilder(args).Build();
+var configuration = host.Services.GetRequiredService<IConfiguration>();
 
+Console.WriteLine("===== CONFIGURATION =====");
+Console.WriteLine($"BotToken = {configuration["Telegram:BotToken"]}");
+Console.WriteLine($"GroupName = {configuration["Telegram:Groups:0:GroupName"]}");
+Console.WriteLine($"ChatId = {configuration["Telegram:Groups:0:ChatId"]}");
+Console.WriteLine("=========================");
 // ── Parse command ────────────────────────────────────────────────────
 if (args.Length == 0)
 {
