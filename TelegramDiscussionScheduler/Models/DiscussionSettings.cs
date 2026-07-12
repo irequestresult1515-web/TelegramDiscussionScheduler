@@ -1,31 +1,13 @@
-namespace TelegramDiscussionScheduler.Models;
-
 public sealed class DiscussionSettings
 {
-    public string GroupName { get; init; } = "Default";
-    public string ChatId { get; init; } = string.Empty;
+    public string GroupName { get; set; } = "Default";
+    public string ChatId { get; set; } = string.Empty;
 
-    public string OpenMessage { get; init; } =
-""""
-السلام عليكم ورحمة الله وبركاته
+    public string OpenMessage { get; set; } = "...";
+    public string CloseMessage { get; set; } = "...";
 
-تم فتح كروب النقاش لاستقبال أسئلتكم واستفساراتكم.
-
-وبالتوفيق جميعًا 🤍
-"""";
-
-    public string CloseMessage { get; init; } =
-"""
-السلام عليكم ورحمة الله وبركاته
-
-تم إغلاق كروب النقاش مؤقتًا.
-
-سيتم إعادة فتحه في الموعد المحدد.
-
-وبالتوفيق جميعًا 🤍
-""";
-    public bool PinOpenMessage { get; init; } = false;
-    public bool PinCloseMessage { get; init; } = false;
-    public bool RestrictOnClose { get; init; } = false;
-    public bool UnrestrictOnOpen { get; init; } = false;
+    public bool PinOpenMessage { get; set; }
+    public bool PinCloseMessage { get; set; }
+    public bool RestrictOnClose { get; set; }
+    public bool UnrestrictOnOpen { get; set; }
 }
