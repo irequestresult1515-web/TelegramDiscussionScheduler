@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using TelegramDiscussionScheduler.Models;
 
 namespace TelegramDiscussionScheduler.Options;
 
@@ -8,18 +7,13 @@ public sealed class TelegramOptions
     public const string SectionName = "Telegram";
 
     [Required]
-    public string BotToken { get; init; } = string.Empty;
+    public string BotToken { get; set; } = string.Empty;
 
-    public string TimeZone { get; init; } = "Asia/Damascus";
+    public string TimeZone { get; set; } = "Asia/Damascus";
 
-    [Range(0, 10)]
-    public int MaxRetryAttempts { get; init; } = 3;
+    public int MaxRetryAttempts { get; set; } = 3;
 
-    [Range(1, 60)]
-    public int RetryDelaySeconds { get; init; } = 2;
+    public int RetryDelaySeconds { get; set; } = 2;
 
-    public List<DiscussionSettings> Groups { get; init; } = new()
-    {
-        new DiscussionSettings()
-    };
+    public List<DiscussionSettings> Groups { get; set; } = new();
 }
